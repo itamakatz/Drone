@@ -1,11 +1,11 @@
 #include "s6DoF.h"
+#include <Metro.h>
 #include <i2c_t3.h>
 #include "debug_def.h"
 #include "general_defs.h"
 #include "SimpleFIFO.h"
 #include "Motor.h"
 #include "Channel.h"
-#include <Metro.h>
 
 #ifndef DEBUG_FUNC_FLOW_main_ino
 	#ifdef DEBUG_FUNC_FLOW
