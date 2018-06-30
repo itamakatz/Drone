@@ -62,6 +62,9 @@
 
 #define CHANNEL_THRESHOLD 2
 
+enum Channel_Types 	{ Throttle_Fixed, Throttle_Returning, Switch_Channel};
+
+
 // motor variables
 #define NUM_OF_MOTORS 4
 #define F_R_INDEX 0

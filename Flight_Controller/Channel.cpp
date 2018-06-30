@@ -9,17 +9,7 @@ Channel::Channel(uint8_t pin){
 	_max_input_signal = MIN_MAX_INPUT_SIGNAL;
 }
 
-void Channel::read_new_raw_signal(unsigned long channel_input){
-	if (_min_input_signal > channel_input) {
-		_min_input_signal = channel_input;
-	}
-	if (_max_input_signal < channel_input) {
-		_max_input_signal = channel_input;
-	}
 
-	_last_channel_input = _new_channel_input;
-	_new_channel_input = map(channel_input, _min_input_signal, _max_input_signal, MIN_THROTTLE_OUTPUT, MAX_THROTTLE_OUTPUT);
-}
 
 uint8_t Channel::get_channel_pin(){
 	return _pin;
@@ -44,4 +34,19 @@ unsigned long Channel::get_max_input_signal(){
 void Channel::reset_channel_boundries(){
 	_min_input_signal = MIN_MAX_INPUT_SIGNAL;
 	_max_input_signal = MIN_MAX_INPUT_SIGNAL;
+}
+
+
+
+
+void Channel::read_new_raw_signal(unsigned long channel_input){
+	if (_min_input_signal > channel_input) {
+		_min_input_signal = channel_input;
+	}
+	if (_max_input_signal < channel_input) {
+		_max_input_signal = channel_input;
+	}
+
+	_last_channel_input = _new_channel_input;
+	_new_channel_input = map(channel_input, _min_input_signal, _max_input_signal, MIN_THROTTLE_OUTPUT, MAX_THROTTLE_OUTPUT);
 }
