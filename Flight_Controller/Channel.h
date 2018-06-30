@@ -23,10 +23,11 @@ public:
 };
 
 class Channel_Throttle : public Channel {
-	
+
 }
 
 class Channel_Switch : public Channel{
+	
 }
 
 class Channel_Dial : public Channel{
