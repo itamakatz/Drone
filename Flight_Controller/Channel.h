@@ -13,38 +13,45 @@ protected:
 public:
 	Channel_Types ch_type;
 
-	Channel(Channel_Types set_ch_type): ch_type(set_ch_type) {}
-	Channel(uint8_t pin);
-	uint8_t get_channel_pin();
-	unsigned long get_new_channel_input();
+	Channel();
+	Channel(uint8_t pin, Channel_Types set_ch_type): ch_type(set_ch_type) {}
+	uint8_t get_channel_pin() {return _pin;}
+	unsigned long get_new_channel_input() {return _new_channel_input;}
 
 	virtual void read_new_raw_signal(unsigned long channel_input) = 0;
-
-	long get_channel_difference();
-
-
 };
+
+// TODO: add static_cast or dynamic_cast
+// B* pB = static_cast<B*>(x);
+// pB->myNewMethod();
 
 class Channel_Throttle : public Channel {
 private:
-	unsigned long _min_input_signal = 0;
-	unsigned long _max_input_signal = 0;
+	unsigned long _min_input_signal = MIN_MAX_INPUT_SIGNAL;
+	unsigned long _max_input_signal = MIN_MAX_INPUT_SIGNAL;
 public:
-	Channel_Throttle(Channel_Types set_ch_type): Channel(set_ch_type) {}
+	Channel_Throttle(uint8_t pin, Channel_Types set_ch_type): Channel(pin, set_ch_type) {}
+	unsigned long get_min_input_signal(return _min_input_signal);
+	unsigned long get_max_input_signal(return _max_input_signal);
+
 	void read_new_raw_signal(unsigned long channel_input);
-	unsigned long get_min_input_signal();
-	unsigned long get_max_input_signal();
 	void reset_channel_boundries();
+	long get_channel_difference();
 }
 
 class Channel_Returning_Throttle : public Channel_Throttle {
+private:
+	_middle_value;
 public:
-	Channel_Returning_Throttle(): Channel_Throttle(Channel_Types::Throttle_Returning) {}
+	Channel_Returning_Throttle(uint8_t pin): Channel_Throttle(pin, Channel_Types::Throttle_Returning) {}
+	void set_middle_value(unsigned long middle_value){_middle_value = middle_value;}
+	unsigned long get_middle_value(){return _middle_value;}
 }
 
 class Channel_Fixed_Throttle : public Channel_Throttle{
 public:
-	Channel_Fixed_Throttle(): Channel_Throttle(Channel_Types::Throttle_Fixed) {}
+	Channel_Fixed_Throttle(uint8_t pin): Channel_Throttle(pin, Channel_Types::Throttle_Fixed) {}
+
 }
 
 class Channel_Switch : public Channel{
