@@ -18,7 +18,7 @@ void RC_setup() {
 
 	switch_channels[CH_A] = Channel_Switch(channel_switch_pins[CH_A]);
 	switch_channels[CH_B] = Channel_Switch(channel_switch_pins[CH_B]);
-}
+
 
 	// digital signals
 	pinMode(CHECK_SIGNAL_OUT, INPUT);
