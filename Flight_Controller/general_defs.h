@@ -1,0 +1,93 @@
+#ifndef __GENETAL_DEFS__
+#define __GENETAL_DEFS__
+
+// ============================== GPIO parameters ================================= //
+
+#define LED_PIN 13
+#define CHECK_SIGNAL_OUT 36
+
+// enable or disable serial prints
+// #define SERIAL_INPUT_ENABLE
+
+//  AnalogWrite
+#define ANALOGWRITE_BIT_RESOLUTION 16
+#define ANALOGWRITE_FREQUENCY 915.527 // for 180MHz CPU
+#define MIN_ANALOGWRITE_VALUE 0
+#define MAX_ANALOGWRITE_VALUE 65535 
+
+// PWM
+#define MIN_POSSIBLE_OUTPUT 0
+#define MAX_POSSIBLE_OUTPUT 2048
+#define BLHEliSuit_MIN_THROTTLE 1020
+#define BLHEliSuit_MAX_THROTTLE 2000
+#define OFF_THROTTLE_OFFSET 50
+
+// ============================ Cyclic Array Parameters =========================== //
+
+#define CYC_ARRAY_SIZE 	50
+#define sixDOF_ALPHA 	(float)0.01
+
+// ============================== Delays and Metros =============================== //
+
+#define INITIAL_DELAY_sixDOF 			60
+#define INITIAL_DELAY_main_ino 			1000
+
+#define CRITICAL_DELAY_LOOP_main_ino 	60
+
+#define METRO_LED_HIGH_INTERVAL 		250 // blincking led 
+#define METRO_GENERAL_INTERVAL 			500
+#define METRO_LED_LOW_INTERVAL 			1000 // blincking led 
+#define METRO_PRINT_INTERVAL 			1000 // print results
+#define METRO_BIG_NUM 					50000 // dummy for initialization
+#define METRO_CHECK_SERIAL_INTERVAL 	1500
+
+// channels
+#define NUM_OF_CHANNELS 8
+#define PULSE_IN_TIMEOUT 25000 // pulseIn - read pwm
+
+
+#define CH_3 2
+#define CH_3_LOWER_BOUND 900
+
+#define CH_A 6
+#define CH_A_UP 997
+#define CH_A_OFF 1996
+#define CH_A_THRESHOLD 50
+
+#define CH_B 4
+#define CH_B_UP 997
+#define CH_B_MIDDLE 1497
+#define CH_B_DOWN 1996
+#define CH_B_THRESHOLD 50
+
+#define CHANNEL_THRESHOLD 2
+
+// motor variables
+#define NUM_OF_MOTORS 4
+#define F_R_INDEX 0
+#define F_L_INDEX 1
+#define B_R_INDEX 2
+#define B_L_INDEX 3
+#define MIN_MAX_INPUT_SIGNAL 1500
+
+enum Yaw_dir 		{ CW = 1, CCW = -1 };
+enum Pitch_dir 		{ Right = 1, Left = -1 };
+enum Roll_dir 		{ Front = 1, Back = -1 };
+enum Up_Down_dir 	{ Up = 1, Down = -1 };
+
+// piezo
+#define PIEZO_PIN 35
+#define PIEZO_RESONANCE 250 // (from 2040?)
+enum Piezo_modes { none, on, off, piezo_set_target_angles };
+#define PIEZO_TONE map(PIEZO_RESONANCE, 0, 1024, MIN_ANALOGWRITE_VALUE, MAX_ANALOGWRITE_VALUE)
+
+#define EULER_YAW_INDEX 0
+#define EULER_PITCH_INDEX 1
+#define EULER_ROLL_INDEX 2
+
+/* PID variables */
+#define Kp 7
+#define Ki 2
+#define Kd 8
+
+#endif
