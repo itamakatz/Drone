@@ -42,19 +42,20 @@
 #define METRO_CHECK_SERIAL_INTERVAL 	1500
 
 // channels
-#define NUM_OF_CHANNELS 8
+#define NUM_OF_SWITCH_CHANNELS 2
+#define NUM_OF_TRHROTTLE_CHANNELS 6
 #define PULSE_IN_TIMEOUT 25000 // pulseIn - read pwm
 
 
 #define CH_3 2
 #define CH_3_LOWER_BOUND 900
 
-#define CH_A 6
+#define CH_A 1
 #define CH_A_UP 997
 #define CH_A_OFF 1996
 #define CH_A_THRESHOLD 50
 
-#define CH_B 4
+#define CH_B 0
 #define CH_B_UP 997
 #define CH_B_MIDDLE 1497
 #define CH_B_DOWN 1996
@@ -63,7 +64,6 @@
 #define CHANNEL_THRESHOLD 2
 
 enum Channel_Types 	{ Throttle_Fixed, Throttle_Returning, Switch_Channel};
-
 
 // motor variables
 #define NUM_OF_MOTORS 4

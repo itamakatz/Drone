@@ -26,7 +26,11 @@
 #endif
 
 uint8_t motor_pins[NUM_OF_MOTORS] = {20, 21, 22, 23};
-uint8_t channel_pins[NUM_OF_CHANNELS] = {2, 3, 4, 5, 6, 7, 8, 9};
+// uint8_t channel_pins[NUM_OF_CHANNELS] = {2, 3, 4, 5, 6, 7, 8, 9};
+// channel number -                        {1, 2, 3, 4, 5, 6, 7, 8};
+
+uint8_t channel_thrust_pins[NUM_OF_TRHROTTLE_CHANNELS] = {2, 3, 4, 5, 7, 9};
+uint8_t channel_switch_pins[NUM_OF_SWITCH_CHANNELS] = {6, 8};
 
 float angles_Euler[3] = {0};
 float angles_Euler_average[3] = {0};
@@ -41,7 +45,8 @@ Piezo_modes last_mode = none;
 SimpleFIFO<int,10> piezo_fifo;
 
 Motor all_motors[NUM_OF_MOTORS];
-Channel all_channels[NUM_OF_CHANNELS];
+Channel_Throttle throttle_channels[NUM_OF_TRHROTTLE_CHANNELS];
+Channel_Switch switch_channels[NUM_OF_SWITCH_CHANNELS];
 
 bool rc_on = false;
 bool run = false;
@@ -100,20 +105,20 @@ void loop(){
 
 	}
 
-	if (all_channels[0].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		yaw(CW, all_channels[0].get_channel_difference());
+	if (throttle_channels[0].get_channel_difference() <= CHANNEL_THRESHOLD) {
+		yaw(CW, throttle_channels[0].get_channel_difference());
 	}
 
-	if (all_channels[3].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		pitch(Right, all_channels[3].get_channel_difference());
+	if (throttle_channels[3].get_channel_difference() <= CHANNEL_THRESHOLD) {
+		pitch(Right, throttle_channels[3].get_channel_difference());
 	}
 
-	if (all_channels[1].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		roll(Front, all_channels[1].get_channel_difference());
+	if (throttle_channels[1].get_channel_difference() <= CHANNEL_THRESHOLD) {
+		roll(Front, throttle_channels[1].get_channel_difference());
 	}
 
-	if (all_channels[2].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		up_down(Up, all_channels[2].get_channel_difference());
+	if (throttle_channels[2].get_channel_difference() <= CHANNEL_THRESHOLD) {
+		up_down(Up, throttle_channels[2].get_channel_difference());
 	}
 
 	if (run) {

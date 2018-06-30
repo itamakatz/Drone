@@ -19,8 +19,8 @@ void print_serial(){
 	Serial.println("Signal on Yellow Wire is: " + String(pulseIn(CHECK_SIGNAL_OUT, HIGH, PULSE_IN_TIMEOUT)));
 
 	for (int i = 0; i < NUM_OF_CHANNELS; ++i) {
-		Serial.print("Channel " + String(i + 1) + ": " + String(all_channels[i].get_new_channel_input()));
-		Serial.print("Channel Difference " + String(i + 1) + ": " + String(all_channels[i].get_channel_difference()));
+		Serial.print("Channel " + String(i + 1) + ": " + String(throttle_channels[i].get_new_channel_input()));
+		Serial.print("Channel Difference " + String(i + 1) + ": " + String(throttle_channels[i].get_channel_difference()));
 		if (i < NUM_OF_MOTORS) {
 			Serial.println(+ ", min: " + String(all_motors[i].get_min_input_signal()) + ", max: " + String(all_motors[i].get_max_input_signal()));
 		} else {

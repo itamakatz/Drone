@@ -29,34 +29,26 @@ class Channel_Throttle : public Channel {
 private:
 	unsigned long _min_input_signal = MIN_MAX_INPUT_SIGNAL;
 	unsigned long _max_input_signal = MIN_MAX_INPUT_SIGNAL;
+	unsigned long _middle_value = 0;
+
 public:
 	Channel_Throttle(uint8_t pin, Channel_Types set_ch_type): Channel(pin, set_ch_type) {}
-	unsigned long get_min_input_signal(return _min_input_signal);
-	unsigned long get_max_input_signal(return _max_input_signal);
+	unsigned long get_min_input_signal(){return _min_input_signal;}
+	unsigned long get_max_input_signal(){return _max_input_signal;}
 
 	void read_new_raw_signal(unsigned long channel_input);
+
 	void reset_channel_boundries();
 	long get_channel_difference();
-}
 
-class Channel_Returning_Throttle : public Channel_Throttle {
-private:
-	_middle_value;
-public:
-	Channel_Returning_Throttle(uint8_t pin): Channel_Throttle(pin, Channel_Types::Throttle_Returning) {}
 	void set_middle_value(unsigned long middle_value){_middle_value = middle_value;}
 	unsigned long get_middle_value(){return _middle_value;}
-}
-
-class Channel_Fixed_Throttle : public Channel_Throttle{
-public:
-	Channel_Fixed_Throttle(uint8_t pin): Channel_Throttle(pin, Channel_Types::Throttle_Fixed) {}
-
-}
+};
 
 class Channel_Switch : public Channel{
 public:
-	Channel_Types ch_type = Channel_Types::Switch_Channel;
-}
+	Channel_Switch(uint8_t pin): Channel(pin, Channel_Types::Switch_Channel) {}
+	void read_new_raw_signal(unsigned long channel_input);
+};
 
 #endif
