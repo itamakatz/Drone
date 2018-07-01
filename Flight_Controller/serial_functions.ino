@@ -20,7 +20,7 @@ void print_serial(){
 
 	for (int i = 0; i < NUM_OF_TRHROTTLE_CHANNELS; ++i) {
 		Serial.print("Channel " + String(i + 1) + ": " + String(throttle_channels[i].get_new_channel_input()));
-		Serial.print("Channel Difference " + String(i + 1) + ": " + String(throttle_channels[i].get_channel_difference()));
+		Serial.print(", Channel Difference " + String(i + 1) + ": " + String(throttle_channels[i].calc_channel_change()));
 		Serial.print(+ ", min: " + String(throttle_channels[i].get_min_input_signal()) + ", max: " + String(throttle_channels[i].get_max_input_signal()));
 
 		if (throttle_channels[i].ch_type == Channel_Types::Throttle_Returning) {
@@ -30,10 +30,8 @@ void print_serial(){
 		Serial.println();
 	}
 	
-	for (int i = 0; i < NUM_OF_SWITCH_CHANNELS; ++i) {
-		Serial.print("Channel (Switch) A: " + String(throttle_channels[CH_A].get_new_channel_input()));
-		Serial.print("Channel (Switch) B: " + String(throttle_channels[CH_B].get_new_channel_input()));
-	}
+	Serial.println("Channel (Switch) A: " + String(switch_channels[CH_A].get_new_channel_input()));
+	Serial.println("Channel (Switch) B: " + String(switch_channels[CH_B].get_new_channel_input()));
 
 	for (int i = 0; i < NUM_OF_MOTORS; ++i) {
 		Serial.print("Motor " + String(i + 1) + ": " + String(all_motors[i].get_motor_speed()));

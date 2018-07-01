@@ -48,9 +48,8 @@ Motor all_motors[NUM_OF_MOTORS];
 Channel_Throttle throttle_channels[NUM_OF_TRHROTTLE_CHANNELS];
 Channel_Switch switch_channels[NUM_OF_SWITCH_CHANNELS];
 
-bool rc_on = false;
 bool run = false;
-bool set_target_angles = false;
+bool rc_on = false;
 bool target_angles_is_set = false;
 
 void setup(){
@@ -97,35 +96,19 @@ void loop(){
 	
 	RC_loop();
 
-	if (set_target_angles && !target_angles_is_set){
-		target_angles_is_set = true;
-		for (int i = 0; i < 3; ++i) {
-			target_angles[i] = angles_Euler_average[i];
-		}
-
-	}
-
-	if (throttle_channels[0].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		yaw(CW, throttle_channels[0].get_channel_difference());
-	}
-
-	if (throttle_channels[3].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		pitch(Right, throttle_channels[3].get_channel_difference());
-	}
-
-	if (throttle_channels[1].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		roll(Front, throttle_channels[1].get_channel_difference());
-	}
-
-	if (throttle_channels[2].get_channel_difference() <= CHANNEL_THRESHOLD) {
-		up_down(Up, throttle_channels[2].get_channel_difference());
-	}
-
 	if (run) {
-		PID();
+
+		// movement derived from RC 
+		yaw(throttle_channels[0].calc_channel_change());
+		roll(throttle_channels[1].calc_channel_change());
+		up_down(throttle_channels[2].calc_channel_change());
+		pitch(throttle_channels[3].calc_channel_change());
+		
+		// PID();
+
+		// all_motors[i].set_motor_speed_change(PIDValue[i]);
 
 		for (int i = 0; i < NUM_OF_MOTORS; ++i) {
-			// all_motors[i].set_motor_speed_change(PIDValue[i]);
 			analogWrite(all_motors[i].get_motor_pin(), all_motors[i].get_motor_speed());
 		}
 	} else {

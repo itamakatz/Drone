@@ -21,16 +21,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+#ifndef IMU_Controller_h
+#define IMU_Controller_h
+
 #include <i2c_t3.h>
 #include "Arduino.h"
 
 #include "IMU_ADXL345.h"
 #define IMU_ACC_ADDR ADXL345_ADDR_ALT_LOW // SDO connected to GND
 #include "IMU_ITG3200.h"
-
-
-#ifndef IMU_Controller_h
-#define IMU_Controller_h
 
 
 #define IMU_BMA180_DEF_ADDR BMA180_ADDRESS_SDO_LOW
