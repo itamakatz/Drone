@@ -14,9 +14,9 @@ void Channel_Throttle::reset_channel_boundries(){
 
 long Channel_Throttle::calc_channel_change(){
 	
-	if (ch_type == Channel_Types::Throttle_Returning && abs(_new_channel_input - _middle_value) > CHANNEL_THRESHOLD) {
+	if (ch_type == Channel_Types::Throttle_Returning && abs(_new_channel_input - _middle_value) > RETURNING_CHANNEL_THRESHOLD) {
 		return (_calc_map(_new_channel_input) - _calc_map(_middle_value));		/* code */
-	} else if(ch_type == Channel_Types::Throttle_Fixed && abs(_new_channel_input - _last_channel_input) > CHANNEL_THRESHOLD) {
+	} else if(ch_type == Channel_Types::Throttle_Fixed) {
 		return (_calc_map(_new_channel_input) - _calc_map(_min_input_signal));
 	}
 		

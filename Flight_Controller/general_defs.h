@@ -61,7 +61,13 @@
 #define CH_B_DOWN 1996
 #define CH_B_THRESHOLD 50
 
-#define CHANNEL_THRESHOLD 50
+#define YAW_CH 3
+#define ROLL_CH 0
+#define PITCH_CH 1
+#define ALTITUDE_CH 2
+
+
+#define RETURNING_CHANNEL_THRESHOLD 50
 
 enum Channel_Types 	{ Throttle_Fixed, Throttle_Returning, Switch_Channel};
 

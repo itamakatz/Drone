@@ -86,4 +86,12 @@ void check_channel_state(){
 		}
 		piezo_notification(Piezo_modes::piezo_set_target_angles);
 	}
+
+	// check if to set target_angles  
+	if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_DOWN)) < CH_B_THRESHOLD) {
+		throttle_channels[0].set_middle_value(pulseIn(channel_thrust_pins[0], HIGH, PULSE_IN_TIMEOUT));
+		throttle_channels[1].set_middle_value(pulseIn(channel_thrust_pins[1], HIGH, PULSE_IN_TIMEOUT));
+		throttle_channels[3].set_middle_value(pulseIn(channel_thrust_pins[3], HIGH, PULSE_IN_TIMEOUT));
+		piezo_notification(Piezo_modes::piezo_set_target_angles);
+	}
 }

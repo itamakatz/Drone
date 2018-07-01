@@ -102,11 +102,12 @@ void loop(){
 
 	if (run) {
 
-		// movement derived from RC 
-		yaw(throttle_channels[0].calc_channel_change());
-		roll(throttle_channels[1].calc_channel_change());
-		up_down(throttle_channels[2].calc_channel_change());
-		pitch(throttle_channels[3].calc_channel_change());
+		// movement derived from RC; altitude MUST be the first one because of absolute messurments
+		altitude(throttle_channels[ALTITUDE_CH].calc_channel_change());
+
+		yaw(throttle_channels[YAW_CH].calc_channel_change());
+		roll(throttle_channels[ROLL_CH].calc_channel_change());
+		pitch(throttle_channels[PITCH_CH].calc_channel_change());
 		
 		// PID();
 
