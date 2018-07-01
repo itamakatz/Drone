@@ -96,6 +96,10 @@ void loop(){
 	
 	RC_loop();
 
+	for (int i = 0; i < NUM_OF_MOTORS; ++i) {
+		all_motors[i].set_motor_speed(0);
+	}
+
 	if (run) {
 
 		// movement derived from RC 
@@ -108,13 +112,10 @@ void loop(){
 
 		// all_motors[i].set_motor_speed_change(PIDValue[i]);
 
-		for (int i = 0; i < NUM_OF_MOTORS; ++i) {
-			analogWrite(all_motors[i].get_motor_pin(), all_motors[i].get_motor_speed());
-		}
-	} else {
-		for (int i = 0; i < NUM_OF_MOTORS; ++i) {
-			analogWrite(all_motors[i].get_motor_pin(), 0);
-		}
+	}
+
+	for (int i = 0; i < NUM_OF_MOTORS; ++i) {
+		analogWrite(all_motors[i].get_motor_pin(), all_motors[i].get_motor_speed());
 	}
 
 	DEBUG_FUNC_FLOW("loop: after updating objects");

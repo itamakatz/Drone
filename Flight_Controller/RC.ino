@@ -53,7 +53,7 @@ void RC_loop() {
 void check_channel_state(){
 
 	// check if RC is off and if so reset channel bounds 
-	if (throttle_channels[CH_3].get_new_raw_input() <= CH_3_LOWER_BOUND) {
+	if (throttle_channels[CH_3].get_new_channel_input() <= CH_3_LOWER_BOUND) {
 
 		rc_on = false;
 		target_angles_is_set = false;

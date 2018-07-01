@@ -17,6 +17,7 @@ void print_serial(){
 	Serial.println();
 
 	Serial.println("Signal on Yellow Wire is: " + String(pulseIn(CHECK_SIGNAL_OUT, HIGH, PULSE_IN_TIMEOUT)));
+	Serial.println("MIN_THROTTLE_OUTPUT is: " + String(MIN_THROTTLE_OUTPUT) + ", MAX_THROTTLE_OUTPUT is: " + String(MAX_THROTTLE_OUTPUT));
 
 	for (int i = 0; i < NUM_OF_TRHROTTLE_CHANNELS; ++i) {
 		Serial.print("Channel " + String(i + 1) + ": " + String(throttle_channels[i].get_new_channel_input()));

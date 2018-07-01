@@ -61,17 +61,20 @@
 #define CH_B_DOWN 1996
 #define CH_B_THRESHOLD 50
 
-#define CHANNEL_THRESHOLD 20
+#define CHANNEL_THRESHOLD 50
 
 enum Channel_Types 	{ Throttle_Fixed, Throttle_Returning, Switch_Channel};
 
 // motor variables
 #define NUM_OF_MOTORS 4
-#define F_R_INDEX 0
-#define F_L_INDEX 1
+#define F_L_INDEX 0
+#define F_R_INDEX 1
 #define B_R_INDEX 2
 #define B_L_INDEX 3
 #define MIN_MAX_INPUT_SIGNAL 1500
+extern unsigned long MIN_THROTTLE_OUTPUT;
+extern unsigned long MAX_THROTTLE_OUTPUT;
+
 
 // piezo
 #define PIEZO_PIN 35
