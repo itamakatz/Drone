@@ -25,7 +25,7 @@
 	#endif
 #endif
 
-uint8_t motor_pins[NUM_OF_MOTORS] = {20, 21, 22, 23};
+uint8_t motor_pins[NUM_OF_MOTORS] = {23, 22, 21, 20};
 // uint8_t channel_pins[NUM_OF_CHANNELS] = {2, 3, 4, 5, 6, 7, 8, 9};
 // channel number -                        {1, 2, 3, 4, 5, 6, 7, 8};
 
@@ -112,6 +112,8 @@ void loop(){
 		// PID();
 
 		// all_motors[i].set_motor_speed_change(PIDValue[i]);
+
+		// all_motors[B_R_INDEX].set_motor_speed(MAX_THROTTLE_OUTPUT);
 
 	}
 

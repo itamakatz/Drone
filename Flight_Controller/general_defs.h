@@ -80,7 +80,7 @@ enum Channel_Types 	{ Throttle_Fixed, Throttle_Returning, Switch_Channel};
 #define MIN_MAX_INPUT_SIGNAL 1500
 extern unsigned long MIN_THROTTLE_OUTPUT;
 extern unsigned long MAX_THROTTLE_OUTPUT;
-
+extern unsigned long MIN_OFFSET_THROTTLE_OUTPUT;
 
 // piezo
 #define PIEZO_PIN 35
