@@ -7,32 +7,31 @@
 #include "Motor.h"
 #include "Channel.h"
 
-
 // if not defined, override macro not to print anything
 #ifndef DEBUG_FUNC_FLOW_main_ino
-	#ifdef DEBUG_FUNC_FLOW
-		#undef DEBUG_FUNC_FLOW
-		#define DEBUG_FUNC_FLOW(str)
-	#endif
+#ifdef DEBUG_FUNC_FLOW
+#undef DEBUG_FUNC_FLOW
+#define DEBUG_FUNC_FLOW(str)
+#endif
 #endif
 
 #ifndef DEBUG_PRINT_main_ino
-	#ifdef DEBUG_PRINT_LN
-		#undef DEBUG_PRINT_LN
-		#define DEBUG_PRINT_LN(str)
-	#endif
-	#ifdef DEBUG_PRINT
-		#undef DEBUG_PRINT
-		#define DEBUG_PRINT(str)
-	#endif
-	#ifdef DEBUG_PRINT_VAL_LN
-		#undef DEBUG_PRINT_VAL_LN
-		#define DEBUG_PRINT_VAL_LN(val)
-	#endif
-	#ifdef DEBUG_PRINT_VAL
-		#undef DEBUG_PRINT_VAL
-		#define DEBUG_PRINT_VAL(val)
-	#endif
+#ifdef DEBUG_PRINT_LN
+#undef DEBUG_PRINT_LN
+#define DEBUG_PRINT_LN(str)
+#endif
+#ifdef DEBUG_PRINT
+#undef DEBUG_PRINT
+#define DEBUG_PRINT(str)
+#endif
+#ifdef DEBUG_PRINT_VAL_LN
+#undef DEBUG_PRINT_VAL_LN
+#define DEBUG_PRINT_VAL_LN(val)
+#endif
+#ifdef DEBUG_PRINT_VAL
+#undef DEBUG_PRINT_VAL
+#define DEBUG_PRINT_VAL(val)
+#endif
 #endif
 
 uint8_t motor_pins[NUM_OF_MOTORS] = {23, 22, 21, 20};
@@ -55,6 +54,7 @@ Channel_Switch switch_channels[NUM_OF_SWITCH_CHANNELS];
 
 bool run = false;
 bool rc_on = false;
+bool print_feedback = false;
 
 void setup()
 {
@@ -109,7 +109,6 @@ void loop()
 
 	if (run)
 	{
-
 		// movement derived from RC; altitude MUST be the first one because of absolute messurments
 		altitude(throttle_channels[ALTITUDE_CH].calc_channel_change());
 
@@ -132,8 +131,6 @@ void loop()
 	delay(CRITICAL_DELAY_LOOP_main_ino);
 }
 
-
-
 // unsigned long scale(double input, double inputMin, double inputMax, unsigned long  outputMin, unsigned long outputMax) { // Like map() just returns a double
 // 	unsigned long output;
 // 	if(inputMin < inputMax)
@@ -148,8 +145,6 @@ void loop()
 
 // 	return output;
 // }
-
-
 
 // ================================================================= Incredibly stable IMU scheme!!!!! ================================================================= //
 /*

@@ -22,9 +22,9 @@
 // PWM
 #define MIN_POSSIBLE_OUTPUT 0
 #define MAX_POSSIBLE_OUTPUT 2048
+#define OFF_THROTTLE_OFFSET 50
 #define BLHEliSuit_MIN_THROTTLE 1020
 #define BLHEliSuit_MAX_THROTTLE 2000
-#define OFF_THROTTLE_OFFSET 50
 
 // ============================ Cyclic Array Parameters =========================== //
 
@@ -96,9 +96,9 @@ enum Piezo_modes { none, on, off, piezo_set_target_angles };
 #define EULER_PITCH_INDEX 1
 #define EULER_ROLL_INDEX 2
 
-/* PID variables */
-#define Kp 7
-#define Ki 2
-#define Kd 8
+// /* PID variables */
+// #define Kp 7
+// #define Ki 2
+// #define Kd 8
 
 #endif

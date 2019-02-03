@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 // #define DEBUG_VERBOSE
-#define DEBUG
+// #define DEBUG
 
 // =========================== Flow Debugging =========================== //
 
@@ -36,14 +36,9 @@
 
 // #define DEBUG_PRINT_main_ino
 
-#define DEBUG_PRINT_sixDOF
+// #define DEBUG_PRINT_sixDOF
 
 // #define DEBUG_PRINTS_Cyc_array
-
-
-// =========================== Normal Prints =========================== //
-
-// #define ENABLE_NORMAL_PRINTS
 
 // =========================== Printing Macros =========================== //
 
@@ -90,7 +85,7 @@
 	#endif
 #endif
  
- 
+
 #ifdef DEBUG
 
 	#ifndef DEBUG_FUNC_FLOW
