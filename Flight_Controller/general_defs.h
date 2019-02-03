@@ -7,7 +7,11 @@
 #define CHECK_SIGNAL_OUT 36
 
 // enable or disable serial prints
-// #define SERIAL_INPUT_ENABLE
+#define SERIAL_INPUT_ENABLE
+
+// Print Strings
+#define PRINT_F_STRING(val) Serial.print(F(val));
+#define PRINT_F_STRING_LN(val) Serial.println(F(val));
 
 //  AnalogWrite
 #define ANALOGWRITE_BIT_RESOLUTION 16

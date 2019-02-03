@@ -2,10 +2,6 @@
 	Metro print_metro = Metro(METRO_PRINT_INTERVAL);
 #endif
 
-#ifdef SERIAL_INPUT_ENABLE
-	Metro check_serial_input_metro = Metro(METRO_CHECK_SERIAL_INTERVAL);	
-#endif
-
 Metro led_metro = Metro(METRO_LED_HIGH_INTERVAL);
 Metro piezo_metro = Metro(METRO_GENERAL_INTERVAL);
 
@@ -31,18 +27,6 @@ void check_metros(){
 
 		digitalWriteFast(LED_PIN, led_state);
 	}
-
-// ************* check_serial_input_metro ************* //
-
-#ifdef SERIAL_INPUT_ENABLE
-	// check check_serial_input_metro
-	if (check_serial_input_metro.check()) {
-		
-		check_key();
-		
-		check_serial_input_metro = Metro(METRO_CHECK_SERIAL_INTERVAL);
-	}
-#endif
 
 // ************* print_metro ************* //
 

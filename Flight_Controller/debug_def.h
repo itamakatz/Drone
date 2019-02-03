@@ -90,6 +90,7 @@
 	#endif
 #endif
  
+ 
 #ifdef DEBUG
 
 	#ifndef DEBUG_FUNC_FLOW
@@ -113,12 +114,21 @@
 	#endif		
 #endif
 
-#ifndef DEBUG_PRINT
+
+#ifndef DEBUG_FUNC_FLOW
 	#define DEBUG_FUNC_FLOW(str)
+#endif
+#ifndef DEBUG_PRINT_LN
 	#define DEBUG_PRINT_LN(str)
+#endif
+#ifndef DEBUG_PRINT
 	#define DEBUG_PRINT(str)
-	#define DEBUG_PRINT_VAL_LN(val)
-	#define DEBUG_PRINT_VAL(val)
+#endif
+#ifndef DEBUG_PRINT_VAL_LN
+	#define DEBUG_PRINT_VAL_LN(str)
+#endif
+#ifndef DEBUG_PRINT_VAL
+	#define DEBUG_PRINT_VAL(str)
 #endif
 
 // =========================== Done =========================== //

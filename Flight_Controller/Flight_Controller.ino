@@ -16,6 +16,25 @@
 	#endif
 #endif
 
+#ifndef DEBUG_PRINT_main_ino
+	#ifdef DEBUG_PRINT_LN
+		#undef DEBUG_PRINT_LN
+		#define DEBUG_PRINT_LN(str)
+	#endif
+	#ifdef DEBUG_PRINT
+		#undef DEBUG_PRINT
+		#define DEBUG_PRINT(str)
+	#endif
+	#ifdef DEBUG_PRINT_VAL_LN
+		#undef DEBUG_PRINT_VAL_LN
+		#define DEBUG_PRINT_VAL_LN(val)
+	#endif
+	#ifdef DEBUG_PRINT_VAL
+		#undef DEBUG_PRINT_VAL
+		#define DEBUG_PRINT_VAL(val)
+	#endif
+#endif
+
 uint8_t motor_pins[NUM_OF_MOTORS] = {23, 22, 21, 20};
 // uint8_t channel_pins[NUM_OF_CHANNELS] = {2, 3, 4, 5, 6, 7, 8, 9};
 // channel number -                        {1, 2, 3, 4, 5, 6, 7, 8};

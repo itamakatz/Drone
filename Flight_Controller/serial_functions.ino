@@ -1,6 +1,6 @@
 void print_serial(){
 
-	Serial.print(F("angles_Euler: "));
+	PRINT_F_STRING_LN("angles_Euler: ");
 	for (int i = 0; i < 3; ++i){
 		Serial.print(angles_Euler[i]);	
 		Serial.print(F(", "));
@@ -57,45 +57,60 @@ void print_serial(){
 
 void serialEvent(){
 
-	DEBUG_FUNC_FLOW("check_key()");
+	DEBUG_FUNC_FLOW("serialEvent()");
 
 	if (Serial.available() > 0) {
 
-		DEBUG_FUNC_FLOW("check_key() - after if (Serial.available() > 0)");
+		DEBUG_FUNC_FLOW("serialEvent() - after if (Serial.available() > 0)");
 		
-		// read ascii char and convert to int representation
-		int incoming_serial = Serial.read() - '0';
-		
-		DEBUG_PRINT_LN("check_key() - incoming_serial is ");
+		char incoming_serial_char = Serial.read();
+
+		DEBUG_PRINT_LN("serialEvent() - incoming_serial is ");
 		DEBUG_PRINT_VAL_LN(incoming_serial);
 
-		switch (incoming_serial) {
+        switch (incoming_serial_char) {
+            case 'H':
+            case 'h':
+				PRINT_F_STRING_LN("1 - Gyro Calicration");
+				PRINT_F_STRING_LN("2 - Calibrate values to zero");
+				PRINT_F_STRING_LN("3 - Run sixDOF_setup again");
+                return;
+
+			case 'm':
+			case 'M':
+
+				if (Serial.available() > 0) {
+
+					// read ascii char and convert to int representation
+					int incoming_serial = Serial.read() - '0';
+					while(Serial.available() > 0){
+						incoming_serial = incoming_serial * 10 + int(Serial.read() - '0');
+					}
+					Serial.println("Number Entered:" + String(incoming_serial));
+				}
+				return;
+		}
+
+		// read ascii char and convert to int representation
+		int incoming_serial_val = incoming_serial_char - '0';
+		
+		switch (incoming_serial_val) {
 			case 1:
 				s6DoF_object.calibrate();
-				Serial.println(F("Gyro calibrated"));
+				PRINT_F_STRING_LN("Gyro calibrated");
 				break;
 			case 2:
 				s6DoF_object.set_zero();
-				Serial.println(F("Calibrated values to zero"));
+				PRINT_F_STRING_LN("Calibrated values to zero");
 				break;
 			case 3:
 				// s6DoF_object.sixDOF_setup((float)0.1);
 				s6DoF_object.sixDOF_setup();
-				Serial.println(F("Run sixDOF_setup again"));
+				PRINT_F_STRING_LN("Run sixDOF_setup again");
 				break;
 			default:
-				Serial.println(F("Error - input key not legal"));
+				DEBUG_PRINT_LN("Error - input key not legal");
 		}
 	}
-
-	// if (Serial.available() > 0) {
-
-	// 	// read ascii char and convert to int representation
-	// 	int incoming_serial = Serial.read() - '0';
-	// 	while(Serial.available() > 0){
-	// 		incoming_serial = incoming_serial * 10 + int(Serial.read() - '0');
-	// 	}
-	// 	Serial.println("Number Entered:" + String(incoming_serial));
-	// }
 }
 #endif
