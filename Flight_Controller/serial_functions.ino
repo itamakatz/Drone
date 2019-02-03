@@ -6,13 +6,13 @@ void print_serial(){
 		Serial.print(F(", "));
 	}
 
-	Serial.println();
+	// Serial.println();
 
-	Serial.print(F("angles_Euler_average: "));
-	for (int i = 0; i < 3; ++i){
-		Serial.print(angles_Euler_average[i]);	
-		Serial.print(F(", "));
-	}
+	// Serial.print(F("angles_Euler_average: "));
+	// for (int i = 0; i < 3; ++i){
+	// 	Serial.print(angles_Euler_average[i]);	
+	// 	Serial.print(F(", "));
+	// }
 
 	Serial.println();
 
@@ -39,9 +39,9 @@ void print_serial(){
 		Serial.println(", Pin Number: " + String(all_motors[i].get_motor_pin()));
 	}
 	
-	for (int i = 0; i < 3; ++i) {
-		Serial.print("target_angles:: " + String(target_angles[i]));
-	}
+	// for (int i = 0; i < 3; ++i) {
+	// 	Serial.print("target_angles:: " + String(target_angles[i]));
+	// }
 
 	Serial.println("run State: " + String(run));
 
@@ -55,7 +55,7 @@ void print_serial(){
 
 #ifdef SERIAL_INPUT_ENABLE
 
-void check_key(){
+void serialEvent(){
 
 	DEBUG_FUNC_FLOW("check_key()");
 
@@ -79,7 +79,8 @@ void check_key(){
 				Serial.println(F("Calibrated values to zero"));
 				break;
 			case 3:
-				s6DoF_object.sixDOF_setup((float)0.1);
+				// s6DoF_object.sixDOF_setup((float)0.1);
+				s6DoF_object.sixDOF_setup();
 				Serial.println(F("Run sixDOF_setup again"));
 				break;
 			default:

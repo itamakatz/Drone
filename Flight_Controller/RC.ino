@@ -78,14 +78,14 @@ void check_channel_state(){
 		piezo_notification(Piezo_modes::off);
 	}
 
-	// check if to set target_angles  
-	if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_UP)) < CH_B_THRESHOLD && !target_angles_is_set) {
-		target_angles_is_set = true;
-		for (int i = 0; i < 3; ++i) {
-			target_angles[i] = angles_Euler_average[i];
-		}
-		piezo_notification(Piezo_modes::piezo_set_target_angles);
-	}
+	// // check if to set target_angles  
+	// if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_UP)) < CH_B_THRESHOLD && !target_angles_is_set) {
+	// 	target_angles_is_set = true;
+	// 	for (int i = 0; i < 3; ++i) {
+	// 		target_angles[i] = angles_Euler_average[i];
+	// 	}
+	// 	piezo_notification(Piezo_modes::piezo_set_target_angles);
+	// }
 
 	// check if to set target_angles  
 	if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_DOWN)) < CH_B_THRESHOLD) {

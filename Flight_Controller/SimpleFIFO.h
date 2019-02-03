@@ -28,6 +28,10 @@
 || #
 ||
 */
+
+#ifndef __SIMPLE_FIFO__
+#define __SIMPLE_FIFO__
+
 template<typename T, int rawSize>
 class SimpleFIFO {
 public:
@@ -77,3 +81,5 @@ template<typename T, int rawSize>
 void SimpleFIFO<T,rawSize>::flush() {
 	nextIn = nextOut = numberOfElements = 0;
 }
+
+#endif
