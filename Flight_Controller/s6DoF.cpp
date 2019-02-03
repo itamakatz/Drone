@@ -8,9 +8,17 @@
 #endif
 
 #ifndef DEBUG_PRINT_sixDOF
+	#ifdef DEBUG_PRINT_LN
+		#undef DEBUG_PRINT_LN
+		#define DEBUG_PRINT_LN(str)
+	#endif
 	#ifdef DEBUG_PRINT
 		#undef DEBUG_PRINT
 		#define DEBUG_PRINT(str)
+	#endif
+	#ifdef DEBUG_PRINT_VAL_LN
+		#undef DEBUG_PRINT_VAL_LN
+		#define DEBUG_PRINT_VAL_LN(val)
 	#endif
 	#ifdef DEBUG_PRINT_VAL
 		#undef DEBUG_PRINT_VAL
@@ -18,7 +26,8 @@
 	#endif
 #endif
 
-void s6DoF::sixDOF_setup(float alpha) {
+void s6DoF::sixDOF_setup() {
+// void s6DoF::sixDOF_setup(float alpha) {
 
 	DEBUG_FUNC_FLOW("s6DoF::sixDOF_setup");
 
@@ -32,7 +41,7 @@ void s6DoF::sixDOF_setup(float alpha) {
 
 	// memset(_c_array, 0, sizeof(_c_array));
 
-	_alpha = alpha;
+	// _alpha = alpha;
 
 	// for (int a_i = 0; a_i < 3; ++a_i) {
 	// 	_c_array[a_i] = Cyc_array_6DoF();
@@ -105,21 +114,21 @@ void s6DoF::get_angles(float* angles_Euler) {
 
 	#ifdef DEBUG_PRINT_sixDOF
 
-		DEBUG_PRINT("s6DoF - _angles_Euler: ");
+		DEBUG_PRINT_LN("s6DoF - _angles_Euler: ");
 		for (int a_i = 0; a_i < 3; ++a_i){
-			Serial.print(_angles_Euler[a_i]);	
-			Serial.print(F(", "));
+			DEBUG_PRINT_VAL(_angles_Euler[a_i]);
+			DEBUG_PRINT(", ");
 		}
 
-		Serial.println();
+		DEBUG_PRINT_LN("");
 
-		DEBUG_PRINT("s6DoF - angles_Euler: ");
+		DEBUG_PRINT_LN("s6DoF - angles_Euler: ");
 		for (int a_i = 0; a_i < 3; ++a_i){
-			Serial.print(angles_Euler[a_i]);	
-			Serial.print(F(", "));
+			DEBUG_PRINT_VAL(angles_Euler[a_i]);	
+			DEBUG_PRINT(", ");
 		}
 
-		Serial.println();
+		DEBUG_PRINT_LN("");
 	#endif
 }
 
@@ -133,7 +142,7 @@ void s6DoF::get_angles(float* angles_Euler) {
 
 // 	#ifdef DEBUG_PRINT_sixDOF
 
-// 		DEBUG_PRINT("s6DoF - _average: ");
+// 		DEBUG_PRINT_LN("s6DoF - _average: ");
 // 		for (int a_i = 0; a_i < 3; ++a_i){
 // 			Serial.print(_average[a_i]);	
 // 			Serial.print(F(", "));
@@ -141,7 +150,7 @@ void s6DoF::get_angles(float* angles_Euler) {
 
 // 		Serial.println();
 
-// 		DEBUG_PRINT("s6DoF - angles_average: ");
+// 		DEBUG_PRINT_LN("s6DoF - angles_average: ");
 // 		for (int a_i = 0; a_i < 3; ++a_i){
 // 			Serial.print(angles_average[a_i]);	
 // 			Serial.print(F(", "));

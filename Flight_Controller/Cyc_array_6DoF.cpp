@@ -8,9 +8,17 @@
 #endif
 
 #ifndef DEBUG_PRINTS_Cyc_array
+	#ifdef DEBUG_PRINT_LN
+		#undef DEBUG_PRINT_LN
+		#define DEBUG_PRINT_LN(str)
+	#endif
 	#ifdef DEBUG_PRINT
 		#undef DEBUG_PRINT
 		#define DEBUG_PRINT(str)
+	#endif
+	#ifdef DEBUG_PRINT_VAL_LN
+		#undef DEBUG_PRINT_VAL_LN
+		#define DEBUG_PRINT_VAL_LN(val)
 	#endif
 	#ifdef DEBUG_PRINT_VAL
 		#undef DEBUG_PRINT_VAL
@@ -68,12 +76,12 @@ void Cyc_array_6DoF::insert(float data) {
 
 		_itemCount++;
 
-		DEBUG_PRINT("_itemCount is");
-		DEBUG_PRINT_VAL(_itemCount);
+		DEBUG_PRINT_LN("_itemCount is");
+		DEBUG_PRINT_VAL_LN(_itemCount);
 	}
 	
-	DEBUG_PRINT("_front before increment");
-	DEBUG_PRINT_VAL(_front);
-	DEBUG_PRINT("sizeof(_array) is :");
-	DEBUG_PRINT_VAL(sizeof(_array));
+	DEBUG_PRINT_LN("_front before increment");
+	DEBUG_PRINT_VAL_LN(_front);
+	DEBUG_PRINT_LN("sizeof(_array) is :");
+	DEBUG_PRINT_VAL_LN(sizeof(_array));
 }

@@ -21,15 +21,16 @@ private:
 	float _angles_Euler[3];
 	float _angles_Euler_zero_offset[3];
 	
-	float _weights;
-	float _alpha;
+	// float _weights;
+	// float _alpha;
 
 	// void _init_samples();
 	// void _update_average(); 
 
 public:
 	s6DoF(){}
-	void sixDOF_setup(float alpha);
+	void sixDOF_setup();
+	// void sixDOF_setup(float alpha);
 	void sixDOF_loop();
 	void get_angles(float* angles_average);
 	// void get_average(float* angles_Euler);

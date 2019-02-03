@@ -173,15 +173,15 @@ void IMU_Controller::getQ(float * q) {
 	float val[6];
 	getValues(val);
 	
-	// DEBUG_PRINT(val[3] * M_PI/180);
-	// DEBUG_PRINT(val[4] * M_PI/180);
-	// DEBUG_PRINT(val[5] * M_PI/180);
-	// DEBUG_PRINT(val[0]);
-	// DEBUG_PRINT(val[1]);
-	// DEBUG_PRINT(val[2]);
-	// DEBUG_PRINT(val[6]);
-	// DEBUG_PRINT(val[7]);
-	// DEBUG_PRINT(val[8]);
+	// DEBUG_PRINT_LN(val[3] * M_PI/180);
+	// DEBUG_PRINT_LN(val[4] * M_PI/180);
+	// DEBUG_PRINT_LN(val[5] * M_PI/180);
+	// DEBUG_PRINT_LN(val[0]);
+	// DEBUG_PRINT_LN(val[1]);
+	// DEBUG_PRINT_LN(val[2]);
+	// DEBUG_PRINT_LN(val[6]);
+	// DEBUG_PRINT_LN(val[7]);
+	// DEBUG_PRINT_LN(val[8]);
 	
 	now = micros();
 	sampleFreq = 1.0 / ((now - lastUpdate) / 1000000.0);

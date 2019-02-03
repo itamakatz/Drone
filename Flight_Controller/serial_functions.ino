@@ -66,8 +66,8 @@ void serialEvent(){
 		// read ascii char and convert to int representation
 		int incoming_serial = Serial.read() - '0';
 		
-		DEBUG_PRINT("check_key() - incoming_serial is ");
-		DEBUG_PRINT_VAL(incoming_serial);
+		DEBUG_PRINT_LN("check_key() - incoming_serial is ");
+		DEBUG_PRINT_VAL_LN(incoming_serial);
 
 		switch (incoming_serial) {
 			case 1:

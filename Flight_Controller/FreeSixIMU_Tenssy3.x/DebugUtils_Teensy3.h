@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef DEBUG_V
   #include <WProgram.h>
-  #define DEBUG_PRINT(str)    \
+  #define DEBUG_PRINT_LN(str)    \
     Serial.print(millis());     \
     Serial.print(": ");    \
     Serial.print(__PRETTY_FUNCTION__); \
@@ -37,12 +37,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
  
 #ifdef DEBUG
-  #define DEBUG_PRINT(str) \
+  #define DEBUG_PRINT_LN(str) \
     Serial.println(str);
 #endif
 
 #ifndef DEBUG_PRINT
-  #define DEBUG_PRINT(str)
+  #define DEBUG_PRINT_LN(str)
 #endif
 
 

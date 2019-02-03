@@ -56,7 +56,7 @@ void check_channel_state(){
 	if (throttle_channels[CH_3].get_new_channel_input() <= CH_3_LOWER_BOUND) {
 
 		rc_on = false;
-		target_angles_is_set = false;
+		// target_angles_is_set = false;
 
 		for (int i = 0; i < NUM_OF_MOTORS; ++i) {
 			throttle_channels[i].reset_channel_boundries();
