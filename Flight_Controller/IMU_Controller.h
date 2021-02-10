@@ -58,7 +58,7 @@ class IMU_Controller
     void getAngles(float * angles);
     
     
-	ADXL345 acc;
+	  ADXL345 acc;
     ITG3200 gyro;
     
     int* raw_acc, raw_gyro, raw_magn;

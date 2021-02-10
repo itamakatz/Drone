@@ -57,6 +57,9 @@ bool rc_on = false;
 bool print_feedback = true;
 float sensitivity = SENSITIVITY_DEFAULT;
 
+IntervalTimer sensors_correction_timer;
+float correction = 0;
+
 void setup()
 {
 	// set AnalogWrite resolution
@@ -79,10 +82,16 @@ void setup()
 
 	// s6DoF_object.sixDOF_setup(sixDOF_ALPHA);
 	s6DoF_object.sixDOF_setup();
+	s6DoF_object.get_angles(&angles_Euler[0]);
+	// s6DoF_object.get_average(&angles_Euler_average[0]);
+
 	pinMode(LED_PIN, OUTPUT);
 	digitalWriteFast(LED_PIN, HIGH);
 
 	RC_setup();
+
+	sensors_correction_timer.begin(sensors_correction, 10000); // TODO MAGIC
+	sensors_correction_timer.priority(250); // TODO MAGIC
 
 	DEBUG_FUNC_FLOW("setup: after objects init");
 }
@@ -124,3 +133,20 @@ void loop()
 
 	delay(CRITICAL_DELAY_LOOP_main_ino);
 }
+
+void sensors_correction(){
+	// correction = (angles_Euler[0] + correction) * 0.01;
+	correction -= (angles_Euler[0] + correction) * 0.03;  // TODO MAGIC
+}
+
+// void print_status(){
+// 	Serial.print("angles_Euler[0]: ");
+// 	Serial.println(angles_Euler[0]);
+// 	Serial.print("correction: ");
+// 	Serial.println(correction);
+// 	Serial.print("sample: ");
+// 	Serial.println(sample);
+// 	Serial.print("move_to: ");
+// 	Serial.println(move_to);
+// 	Serial.println();
+// }

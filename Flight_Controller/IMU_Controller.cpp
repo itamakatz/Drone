@@ -195,6 +195,7 @@ void IMU_Controller::getQ(float * q) {
 	q[3] = q3;
 }
 
+// Itamar: I think think this is really the Tait–Bryan angles
 // Returns the Euler angles in radians defined with the Aerospace sequence.
 // See Sebastian O.H. Madwick report 
 // "An efficient orientation filter for inertial and intertial/magnetic sensor arrays" Chapter 2 Quaternion representation

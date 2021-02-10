@@ -79,6 +79,7 @@ void check_channel_state(){
 	// check if to set target_angles  
 	if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_DOWN)) < CH_B_THRESHOLD) {
 		set_returning_throttle_middle_val();
+		s6DoF_object.set_zero();
 		piezo_notification(Piezo_modes::set_target_angles);
 	}
 

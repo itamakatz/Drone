@@ -1,7 +1,7 @@
-void piezo_notification(Piezo_modes mode){
-
 #define PIEZZO_SHORT_DELAY 200
 #define PIEZZO_VERY_LONG_DELAY 1000
+
+void piezo_notification(Piezo_modes mode){
 	
 	if (last_mode != mode) {
 		switch (mode) {
