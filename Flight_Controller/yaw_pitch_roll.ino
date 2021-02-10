@@ -1,50 +1,32 @@
-void yaw(long move_amount){
+void set_absolute_motors_speed(long c_altitude, long c_yaw, long c_roll, long c_pitch){
+	
+	long new_speeds[NUM_OF_MOTORS];
 
+	// altitude
+	for (int i = 0; i < NUM_OF_MOTORS; i++) { new_speeds[i] = /*32639*/ + c_altitude; }
 
-	for (int i = 0; i < NUM_OF_MOTORS; ++i) {
-		if(all_motors[i].get_motor_spin == Motor_spin_dir::CW_Spin){
-			all_motors[i].set_motor_speed(all_motors[i].get_motor_speed() - move_amount);
-		} else{
-			all_motors[i].set_motor_speed(all_motors[i].get_motor_speed() + move_amount);
-		}
+	// yaw
+	for (int i = 0; i < NUM_OF_MOTORS; i++) { 
+		if(all_motors[i].get_motor_spin() == Motor_spin_dir::CW_Spin){ new_speeds[i] -= c_yaw; }
+		else{ new_speeds[i] += c_yaw; }
 	}
 
-	// all_motors[F_L_INDEX].set_motor_speed(all_motors[F_L_INDEX].get_motor_speed() + move_amount);
-	// all_motors[B_R_INDEX].set_motor_speed(all_motors[B_R_INDEX].get_motor_speed() + move_amount);
+	// pitch
+	new_speeds[F_R_INDEX] += c_pitch;
+	new_speeds[B_R_INDEX] += c_pitch;
 
-	// all_motors[F_R_INDEX].set_motor_speed(all_motors[F_R_INDEX].get_motor_speed() - move_amount);
-	// all_motors[B_L_INDEX].set_motor_speed(all_motors[B_L_INDEX].get_motor_speed() - move_amount);
+	new_speeds[B_L_INDEX] -= c_pitch;
+	new_speeds[F_L_INDEX] -= c_pitch;
 
-}
+	// roll
+	new_speeds[F_R_INDEX] += c_roll;
+	new_speeds[F_L_INDEX] += c_roll;
 
-void pitch(long move_amount){
+	new_speeds[B_L_INDEX] -= c_roll;
+	new_speeds[B_R_INDEX] -= c_roll;
 
-	all_motors[F_R_INDEX].set_motor_speed(all_motors[F_R_INDEX].get_motor_speed() + move_amount);
-	all_motors[B_R_INDEX].set_motor_speed(all_motors[B_R_INDEX].get_motor_speed() + move_amount);
-
-	all_motors[B_L_INDEX].set_motor_speed(all_motors[B_L_INDEX].get_motor_speed() - move_amount);
-	all_motors[F_L_INDEX].set_motor_speed(all_motors[F_L_INDEX].get_motor_speed() - move_amount);
-
-}
-
-void roll(long move_amount){
-	
-	all_motors[F_R_INDEX].set_motor_speed(all_motors[F_R_INDEX].get_motor_speed() + move_amount);
-	all_motors[F_L_INDEX].set_motor_speed(all_motors[F_L_INDEX].get_motor_speed() + move_amount);
-
-	all_motors[B_L_INDEX].set_motor_speed(all_motors[B_L_INDEX].get_motor_speed() - move_amount);
-	all_motors[B_R_INDEX].set_motor_speed(all_motors[B_R_INDEX].get_motor_speed() - move_amount);
-
-}
-
-void altitude(long move_amount){
-	
-	for (int i = 0; i < NUM_OF_MOTORS; ++i) {
-		all_motors[i].set_motor_speed(all_motors[i].get_motor_speed() + move_amount);
+	// update motors
+	for (int i = 0; i < NUM_OF_MOTORS; ++i) { 
+		all_motors[i].set_motor_speed(all_motors[i].get_motor_speed() + new_speeds[i]);
 	}
-	// all_motors[F_R_INDEX].set_motor_speed(all_motors[F_R_INDEX].get_motor_speed() + move_amount);
-	// all_motors[F_L_INDEX].set_motor_speed(all_motors[F_L_INDEX].get_motor_speed() + move_amount);
-	// all_motors[B_L_INDEX].set_motor_speed(all_motors[B_L_INDEX].get_motor_speed() + move_amount);
-	// all_motors[B_R_INDEX].set_motor_speed(all_motors[B_R_INDEX].get_motor_speed() + move_amount);
-
 }

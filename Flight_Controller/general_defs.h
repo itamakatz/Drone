@@ -56,7 +56,7 @@
 
 #define CH_A 1
 #define CH_A_UP 997
-#define CH_A_OFF 1996
+#define CH_A_DOWN 1996
 #define CH_A_THRESHOLD 50
 
 #define CH_B 0
@@ -69,9 +69,11 @@
 #define ROLL_CH 0
 #define PITCH_CH 1
 #define ALTITUDE_CH 2
+#define EXTRA_RIGHT_CH					4
+#define EXTRA_LEFT_CH					5
 
-
-#define RETURNING_CHANNEL_THRESHOLD 50
+#define RETURNING_CHANNEL_THRESHOLD 	50
+#define GENERAL_CHANNEL_THRESHOLD		50
 
 enum Channel_Types 	{ Throttle_Fixed, Throttle_Returning, Switch_Channel};
 
@@ -89,12 +91,16 @@ extern unsigned long MIN_OFFSET_THROTTLE_OUTPUT;
 // piezo
 #define PIEZO_PIN 35
 #define PIEZO_RESONANCE 250 // (from 2040?)
-enum Piezo_modes { none, on, off, piezo_set_target_angles };
+enum Piezo_modes { none, on, off, set_target_angles, set_sensitivity };
 #define PIEZO_TONE map(PIEZO_RESONANCE, 0, 1024, MIN_ANALOGWRITE_VALUE, MAX_ANALOGWRITE_VALUE)
 
 #define EULER_YAW_INDEX 0
 #define EULER_PITCH_INDEX 1
 #define EULER_ROLL_INDEX 2
+
+#define SENSITIVITY_LOWEST 0.3
+#define SENSITIVITY_HIGHEST 1
+#define SENSITIVITY_DEFAULT 0.75
 
 // /* PID variables */
 // #define Kp 7

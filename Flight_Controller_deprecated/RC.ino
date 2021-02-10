@@ -1,5 +1,4 @@
 void RC_setup() {
-
 	all_motors[F_R_INDEX] = Motor(motor_pins[F_R_INDEX], Motor_spin_dir::CW_Spin);
 	all_motors[B_L_INDEX] = Motor(motor_pins[B_L_INDEX], Motor_spin_dir::CW_Spin);
 
@@ -20,7 +19,7 @@ void RC_setup() {
 	// digital signals
 	pinMode(CHECK_SIGNAL_OUT, INPUT);
 
-	for (int i = 0; i < NUM_OF_TRHROTTLE_CHANNELS; ++i) { pinMode(channel_thrust_pins[i], INPUT); }
+	for (int i = 0; i < NUM_OF_THROTTLE_CHANNELS; ++i) { pinMode(channel_thrust_pins[i], INPUT); }
 
 	for (int i = 0; i < NUM_OF_SWITCH_CHANNELS; ++i) { pinMode(channel_switch_pins[i], INPUT); }
 }
@@ -30,29 +29,23 @@ void RC_loop() {
 	// check RC special chanels
 	check_channel_state();
 
-/* TODO: change PULSE_IN_TIMEOUT*/
+	// TODO: change PULSE_IN_TIMEOUT
 
 	// read PWM signal from the reciver 
 
-	for (int i = 0; i < NUM_OF_TRHROTTLE_CHANNELS; ++i) { throttle_channels[i].read_new_raw_signal(pulseIn(channel_thrust_pins[i], HIGH, PULSE_IN_TIMEOUT)); }
+	for (int i = 0; i < NUM_OF_THROTTLE_CHANNELS; ++i) { throttle_channels[i].read_new_raw_signal(pulseIn(channel_thrust_pins[i], HIGH, PULSE_IN_TIMEOUT)); }
 
 	for (int i = 0; i < NUM_OF_SWITCH_CHANNELS; ++i) { switch_channels[i].read_new_raw_signal(pulseIn(channel_switch_pins[i], HIGH, PULSE_IN_TIMEOUT)); }
-}
-
-float float_map(float x, float in_min, float in_max, float out_min, float out_max) {
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void check_channel_state(){
 
 	// check if RC is off and if so reset channel bounds 
 	if (throttle_channels[CH_3].get_new_channel_input() <= CH_3_LOWER_BOUND) {
-
 		rc_on = false;
 		// target_angles_is_set = false;
 
-		for (int i = 0; i < NUM_OF_MOTORS; ++i) { throttle_channels[i].reset_channel_boundries(); }
-		
+		// for (int i = 0; i < NUM_OF_MOTORS; ++i) { throttle_channels[i].reset_channel_boundries(); } //TODO maybe not comment
 	} else if(!rc_on) {
 		rc_on = true;
 		set_returning_throttle_middle_val();
@@ -64,6 +57,7 @@ void check_channel_state(){
 		piezo_notification(Piezo_modes::on);
 	} else {
 		run = false;
+		// for (int i = 0; i < NUM_OF_MOTORS; ++i) { all_motors[i].set_absolute_speed(0); }
 		piezo_notification(Piezo_modes::off);
 	}
 
@@ -73,35 +67,29 @@ void check_channel_state(){
 	// 	for (int i = 0; i < 3; ++i) {
 	// 		target_angles[i] = angles_Euler_average[i];
 	// 	}
-	// 	piezo_notification(Piezo_modes::set_target_angles);
+	// 	piezo_notification(Piezo_modes::piezo_set_target_angles);
 	// }
 
-	// check if to set target_angles  
+	// check if to set missle values of the throttles
 	if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_DOWN)) < CH_B_THRESHOLD) {
 		set_returning_throttle_middle_val();
-		piezo_notification(Piezo_modes::set_target_angles);
+		piezo_notification(Piezo_modes::piezo_set_target_angles);
 	}
 
 	if (abs(int(switch_channels[CH_B].get_new_channel_input() - CH_B_UP)) < CH_B_THRESHOLD) {
-		sensitivity = float_map(throttle_channels[EXTRA_RIGHT_CH].get_new_channel_input(), 
-							throttle_channels[EXTRA_RIGHT_CH].get_min_input_signal(), 
-							throttle_channels[EXTRA_RIGHT_CH].get_max_input_signal(), 
-							SENSITIVITY_LOWEST, 
-							SENSITIVITY_HIGHEST);
-		piezo_notification(Piezo_modes::set_sensitivity);
-		// if (abs(int(throttle_channels[EXTRA_RIGHT_CH].get_new_channel_input() - throttle_channels[EXTRA_RIGHT_CH].get_max_input_signal())) < GENERAL_CHANNEL_THRESHOLD) {
-		// 	sensitivity = SENSITIVITY_LARGE;
-		// }else if (abs(int(throttle_channels[EXTRA_RIGHT_CH].get_new_channel_input() - throttle_channels[EXTRA_RIGHT_CH].get_min_input_signal())) < GENERAL_CHANNEL_THRESHOLD) {
-		// 	sensitivity = SENSITIVITY_SMALL;
-		// }else{
-		// 	sensitivity = SENSITIVITY_DEFAULT;
-		// }
+		setup_mode = true;
+	// 	if (abs(int(throttle_channels[EXTRA_RIGHT_CH].get_channel_current() - throttle_channels[EXTRA_RIGHT_CH].get_max_input_signal())) < GENERAL_CHANNEL_THRESHOLD) {
+	// 		sensitivity = sensitivity*1.05;
+	// 	}else if(abs(int(throttle_channels[EXTRA_RIGHT_CH].get_channel_current() - throttle_channels[EXTRA_RIGHT_CH].get_min_input_signal())) < GENERAL_CHANNEL_THRESHOLD) {
+	// 		sensitivity = sensitivity/1.05;
+	// 	}
+	}else{
+		setup_mode = false;
 	}
-	// }else{ sensitivity = SENSITIVITY_DEFAULT; }
 }
 
 void set_returning_throttle_middle_val(){
-		throttle_channels[0].set_middle_value(pulseIn(channel_thrust_pins[0], HIGH, PULSE_IN_TIMEOUT));
-		throttle_channels[1].set_middle_value(pulseIn(channel_thrust_pins[1], HIGH, PULSE_IN_TIMEOUT));
-		throttle_channels[3].set_middle_value(pulseIn(channel_thrust_pins[3], HIGH, PULSE_IN_TIMEOUT));
+	throttle_channels[0].set_middle_value(pulseIn(channel_thrust_pins[0], HIGH, PULSE_IN_TIMEOUT));
+	throttle_channels[1].set_middle_value(pulseIn(channel_thrust_pins[1], HIGH, PULSE_IN_TIMEOUT));
+	throttle_channels[3].set_middle_value(pulseIn(channel_thrust_pins[3], HIGH, PULSE_IN_TIMEOUT));
 }
