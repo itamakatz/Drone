@@ -27,6 +27,21 @@ void Channel_Throttle::reset_channel_boundries(){
 	_max_input_signal = MIN_MAX_INPUT_SIGNAL;
 }
 
+// long Channel_Throttle::get_channel_current(){
+// 	long _last_reported_value;
+// 	if (ch_type == Channel_Types::Throttle_Returning){
+// 		if(abs(_new_channel_input - _middle_value) > RETURNING_CHANNEL_THRESHOLD){
+// 			_last_reported_value = (_calc_map(_new_channel_input) - _calc_map(_middle_value));
+// 		}else{
+// 			_last_reported_value = _middle_value;
+// 		}
+// 	} else if(ch_type == Channel_Types::Throttle_Fixed) {
+// 		_last_reported_value = (_calc_map(_new_channel_input) - _calc_map(_min_input_signal));
+// 	}
+		
+// 	return _last_reported_value;
+// }
+
 long Channel_Throttle::calc_channel_change(){
 	
 	if (ch_type == Channel_Types::Throttle_Returning && abs(_new_channel_input - _middle_value) > RETURNING_CHANNEL_THRESHOLD) {

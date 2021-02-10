@@ -26,7 +26,7 @@ void print_serial()
 	{
 		Serial.print("Channel " + String(i + 1) + ": " + String(throttle_channels[i].get_new_channel_input()));
 		Serial.print(", Channel Difference " + String(i + 1) + ": " + String(throttle_channels[i].calc_channel_change()));
-		Serial.print(", Channel Current " + String(i + 1) + ": " + String(throttle_channels[i].get_channel_current()));		
+		// Serial.print(", Channel Current " + String(i + 1) + ": " + String(throttle_channels[i].get_channel_current()));		
 		Serial.print(+", min: " + String(throttle_channels[i].get_min_input_signal()) + ", max: " + String(throttle_channels[i].get_max_input_signal()));
 
 		if (throttle_channels[i].ch_type == Channel_Types::Throttle_Returning)
